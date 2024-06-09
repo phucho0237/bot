@@ -12,6 +12,8 @@ const client = new Client({
 
 client.commands = new Collection();
 
+require("./database/connect")();
+
 ["events", "commands"].forEach((handler) => {
    require(`./handlers/${handler}`)(client);
 });
