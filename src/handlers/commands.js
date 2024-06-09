@@ -25,11 +25,11 @@ module.exports = (client) => {
       }
    }
 
-   const rest = new REST().setToken(config.botToken);
+   const rest = new REST().setToken(config.bot.token);
 
    (async () => {
       try {
-         await rest.put(Routes.applicationCommands(config.botClientId), {
+         await rest.put(Routes.applicationCommands(config.bot.clientId), {
             body: cmdArray,
          });
 

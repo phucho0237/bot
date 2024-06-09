@@ -16,6 +16,6 @@ client.commands = new Collection();
    require(`./handlers/${handler}`)(client);
 });
 
-client.login(config.botToken);
+client.login(config.bot.token);
 
 require("./database/connect")();
