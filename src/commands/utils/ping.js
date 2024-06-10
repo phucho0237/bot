@@ -1,6 +1,6 @@
 const {
    SlashCommandBuilder,
-   CommandInteraction,
+   ChatInputCommandInteraction,
    EmbedBuilder,
 } = require("discord.js");
 
@@ -10,7 +10,7 @@ module.exports = {
       .setDescription("Show the bot's ping"),
    /**
     *
-    * @param {CommandInteraction} interaction
+    * @param {ChatInputCommandInteraction} interaction
     */
    async execute(interaction) {
       const sent = await interaction.reply({
