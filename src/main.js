@@ -1,4 +1,9 @@
-const { Client, GatewayIntentBits, Collection } = require("discord.js");
+const {
+   Client,
+   GatewayIntentBits,
+   ActivityType,
+   Collection,
+} = require("discord.js");
 
 const config = require("./config");
 
@@ -8,6 +13,10 @@ const client = new Client({
       GatewayIntentBits.GuildMembers,
       GatewayIntentBits.GuildMessages,
    ],
+   presence: {
+      activities: [{ name: "somthin", type: ActivityType.Competing }],
+      status: "dnd",
+   },
 });
 
 client.commands = new Collection();
