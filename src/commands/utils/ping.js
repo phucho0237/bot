@@ -1,14 +1,40 @@
-const { SlashCommandBuilder, CommandInteraction } = require("discord.js");
+const {
+   SlashCommandBuilder,
+   CommandInteraction,
+   EmbedBuilder,
+} = require("discord.js");
 
 module.exports = {
    data: new SlashCommandBuilder()
       .setName("ping")
-      .setDescription("Replies with Pong!"),
+      .setDescription("Show the bot's ping"),
    /**
     *
     * @param {CommandInteraction} interaction
     */
    async execute(interaction) {
-      await interaction.reply("Pong!");
+      const sent = await interaction.reply({
+         embeds: [
+            new EmbedBuilder()
+               .setColor("White")
+               .setDescription("🏓 Pinging..."),
+         ],
+         fetchReply: true,
+      });
+
+      interaction.editReply({
+         embeds: [
+            new EmbedBuilder()
+               .setColor("White")
+               .setTitle("🏓 Ping")
+               .setDescription(
+                  `- Websocket latency: **${
+                     interaction.client.ws.ping
+                  }ms**\n- Roundtrip latency: **${
+                     sent.createdTimestamp - interaction.createdTimestamp
+                  }ms**`
+               ),
+         ],
+      });
    },
 };
