@@ -4,6 +4,7 @@ const {
    ActivityType,
    Collection,
 } = require("discord.js");
+const { Player } = require("discord-player");
 
 const config = require("./config");
 
@@ -12,12 +13,17 @@ const client = new Client({
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMembers,
       GatewayIntentBits.GuildMessages,
+      GatewayIntentBits.GuildVoiceStates,
    ],
    presence: {
       activities: [{ name: "somthin", type: ActivityType.Competing }],
       status: "dnd",
    },
 });
+
+const player = new Player(client);
+player.extractors.loadDefault();
+// player.extractors.loadDefault((ext) => ext !== "YouTubeExtractor");
 
 client.commands = new Collection();
 
