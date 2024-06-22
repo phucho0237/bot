@@ -10,13 +10,10 @@ module.exports = {
             new EmbedBuilder()
                .setColor("#CED9DE")
                .setAuthor({ name: "Now playing" })
-               .setTitle(`${track.title} - ${track.author}`)
-               .setURL(track.url)
-               .setThumbnail(track.thumbnail)
-               .setFooter({
-                  text: `Requested by: ${track.requestedBy.username}`,
-                  iconURL: track.requestedBy.displayAvatarURL(),
-               }),
+               .setDescription(
+                  `[**${track.title} - ${track.author}**](${track.url}) - \`${track.duration}\``
+               )
+               .setThumbnail(track.thumbnail),
          ],
       });
    },
