@@ -9,7 +9,7 @@ module.exports = {
          embeds: [
             new EmbedBuilder()
                .setColor("#CED9DE")
-               .setAuthor({ name: "Now playing" })
+               .setTitle("<a:cd:1253896277524217946> Now playing")
                .setDescription(
                   `[**${track.title} - ${track.author}**](${track.url}) - \`${track.duration}\``
                )

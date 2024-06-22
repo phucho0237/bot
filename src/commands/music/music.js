@@ -3,7 +3,7 @@ const {
    ChatInputCommandInteraction,
    EmbedBuilder,
 } = require("discord.js");
-const { useMainPlayer } = require("discord-player");
+const { useMainPlayer, useQueue } = require("discord-player");
 
 module.exports = {
    data: new SlashCommandBuilder()
@@ -19,6 +19,9 @@ module.exports = {
                   .setDescription("The query you want to play")
                   .setRequired(true)
             )
+      )
+      .addSubcommand((subcmd) =>
+         subcmd.setName("stop").setDescription("Stop the queue")
       ),
    /**
     *
@@ -55,8 +58,9 @@ module.exports = {
                const { track } = await player.play(voiceChannel, searchResult, {
                   requestedBy: interaction.user,
                   nodeOptions: {
-                     leaveOnEnd: true,
-                     leaveOnEndCooldown: 60000,
+                     leaveOnEnd: false,
+                     leaveOnEmpty: true,
+                     leaveOnEmptyCooldown: 0,
                      metadata: interaction,
                   },
                });
@@ -77,6 +81,19 @@ module.exports = {
                });
                console.error(err);
             }
+         }
+         case "stop": {
+            const queue = useQueue(interaction.guild.id);
+
+            queue.delete();
+
+            interaction.reply({
+               embeds: [
+                  new EmbedBuilder()
+                     .setColor("#CED9DE")
+                     .setDescription("Stopped the queue"),
+               ],
+            });
          }
       }
    },
