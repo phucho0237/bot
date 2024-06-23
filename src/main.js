@@ -23,7 +23,6 @@ const client = new Client({
 
 const player = new Player(client);
 player.extractors.loadDefault();
-// player.extractors.loadDefault((ext) => ext !== "YouTubeExtractor");
 
 client.commands = new Collection();
 
