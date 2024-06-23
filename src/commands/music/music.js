@@ -22,6 +22,21 @@ module.exports = {
       )
       .addSubcommand((subcmd) =>
          subcmd.setName("stop").setDescription("Stop the queue")
+      )
+      .addSubcommand((subcmd) =>
+         subcmd.setName("skip").setDescription("Skip the current song")
+      )
+      .addSubcommand((subcmd) =>
+         subcmd
+            .setName("volume")
+            .setDescription("Change the volume of the bot")
+            .addNumberOption((opt) =>
+               opt
+                  .setName("value")
+                  .setDescription("The value of volume you want to set")
+                  .setMinValue(0)
+                  .setRequired(true)
+            )
       ),
    /**
     *
@@ -85,15 +100,61 @@ module.exports = {
          case "stop": {
             const queue = useQueue(interaction.guild.id);
 
-            queue.delete();
+            await interaction.deferReply();
 
-            interaction.reply({
-               embeds: [
-                  new EmbedBuilder()
-                     .setColor("#CED9DE")
-                     .setDescription("Stopped the queue"),
-               ],
-            });
+            try {
+               queue.delete();
+
+               interaction.editReply({
+                  embeds: [
+                     new EmbedBuilder()
+                        .setColor("#CED9DE")
+                        .setDescription("Stopped the queue"),
+                  ],
+               });
+            } catch (err) {
+               console.error(err);
+            }
+         }
+         case "skip": {
+            const queue = useQueue(interaction.guild.id);
+
+            await interaction.deferReply();
+
+            try {
+               queue.node.skip();
+
+               interaction.editReply({
+                  embeds: [
+                     new EmbedBuilder()
+                        .setColor("#CED9DE")
+                        .setDescription("Skipped the song"),
+                  ],
+               });
+            } catch (err) {
+               console.error(err);
+            }
+         }
+         case "volume": {
+            const value = interaction.options.getNumber("value");
+
+            const queue = useQueue(interaction.guild.id);
+
+            await interaction.deferReply();
+
+            try {
+               queue.node.setVolume(value);
+
+               interaction.editReply({
+                  embeds: [
+                     new EmbedBuilder()
+                        .setColor("#CED9DE")
+                        .setDescription(`Set the volume to \`${value}%\``),
+                  ],
+               });
+            } catch (err) {
+               console.error(err);
+            }
          }
       }
    },
