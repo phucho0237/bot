@@ -113,6 +113,10 @@ module.exports = {
                   ],
                });
             } catch (err) {
+               interaction.followUp({
+                  content: "Something went wrong! Please try again later",
+                  ephemeral: true,
+               });
                console.error(err);
             }
          }
@@ -132,6 +136,10 @@ module.exports = {
                   ],
                });
             } catch (err) {
+               interaction.followUp({
+                  content: "Something went wrong! Please try again later",
+                  ephemeral: true,
+               });
                console.error(err);
             }
          }
@@ -153,6 +161,10 @@ module.exports = {
                   ],
                });
             } catch (err) {
+               interaction.followUp({
+                  content: "Something went wrong! Please try again later",
+                  ephemeral: true,
+               });
                console.error(err);
             }
          }
