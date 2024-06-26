@@ -25,7 +25,7 @@ module.exports = {
       interaction.editReply({
          embeds: [
             new EmbedBuilder()
-               .setColor("White")
+               .setColor("#CED9DE")
                .setTitle("🏓 Ping")
                .setDescription(
                   `- Websocket latency: **${
