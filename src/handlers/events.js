@@ -1,9 +1,6 @@
-const { useMainPlayer } = require("discord-player");
 const fs = require("node:fs");
 
 module.exports = (client) => {
-   const player = useMainPlayer();
-
    const eventDir = fs.readdirSync("./src/events");
 
    for (const folder of eventDir) {

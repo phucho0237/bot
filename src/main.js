@@ -4,7 +4,6 @@ const {
    ActivityType,
    Collection,
 } = require("discord.js");
-const { Player } = require("discord-player");
 
 const config = require("./config");
 
@@ -20,9 +19,6 @@ const client = new Client({
       status: "dnd",
    },
 });
-
-const player = new Player(client);
-player.extractors.loadDefault();
 
 client.commands = new Collection();
 
