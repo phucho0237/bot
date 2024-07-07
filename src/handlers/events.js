@@ -15,11 +15,7 @@ module.exports = (client) => {
          const event = require(`../events/${folder}/${file}`);
 
          if ("execute" in event) {
-            if (event.type === "player") {
-               player.events.on(event.name, (...args) =>
-                  event.execute(...args)
-               );
-            } else if (event.once) {
+            if (event.once) {
                client.once(event.name, (...args) => event.execute(...args));
             } else {
                client.on(event.name, (...args) => event.execute(...args));
