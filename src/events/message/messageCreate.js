@@ -1,4 +1,5 @@
 const { Events, Message } = require("discord.js");
+const moment = require("moment");
 
 const afkModel = require("../../database/model/afk");
 
@@ -17,10 +18,13 @@ module.exports = {
 
       if (mentionedMember) {
          const afkData = await afkModel.findOne({ userId: mentionedMember.id });
+
+         const formattedTime = moment(afkData.timestamp).unix();
+
          if (afkData) {
             message.channel
                .send(
-                  `\`${mentionedMember.user.username}\` is AFK with reason: \`${afkData.reason}\``
+                  `\`${mentionedMember.user.username}\` is AFK <t:${formattedTime}:R> with reason: \`${afkData.reason}\``
                )
                .then((msg) => {
                   setTimeout(() => msg.delete(), 5000);
