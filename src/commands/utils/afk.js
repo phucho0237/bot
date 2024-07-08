@@ -26,14 +26,6 @@ module.exports = {
             reason: reason,
             timestamp: Date.now(),
          });
-      } else {
-         await afkModel.updateOne(
-            { userId: interaction.user.id },
-            {
-               reason: reason,
-               timestamp: Date.now(),
-            }
-         );
       }
 
       interaction.reply({

@@ -37,7 +37,7 @@ module.exports = {
          await afkModel.deleteOne({ userId: authorId });
 
          message.channel
-            .send(`Welcome back <@${userId}>, I removed your AFK status`)
+            .send(`Welcome back <@${authorId}>, I removed your AFK status`)
             .then((msg) => {
                setTimeout(() => msg.delete(), 5000);
             });
