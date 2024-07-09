@@ -19,9 +19,9 @@ module.exports = {
       if (mentionedMember) {
          const afkData = await afkModel.findOne({ userId: mentionedMember.id });
 
-         const formattedTime = moment(afkData.timestamp).unix();
-
          if (afkData) {
+            const formattedTime = moment(afkData.timestamp).unix();
+
             message.channel
                .send(
                   `\`${mentionedMember.user.username}\` is AFK <t:${formattedTime}:R> with reason: \`${afkData.reason}\``
