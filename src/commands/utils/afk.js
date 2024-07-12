@@ -1,6 +1,7 @@
 const {
    SlashCommandBuilder,
    ChatInputCommandInteraction,
+   EmbedBuilder,
 } = require("discord.js");
 
 const afkModel = require("../../database/model/afk");
@@ -29,7 +30,13 @@ module.exports = {
       }
 
       interaction.reply({
-         content: `<@${interaction.user.id}> I set your AFK status with reason: \`${reason}\``,
+         embeds: [
+            new EmbedBuilder()
+               .setColor("#CED9DE")
+               .setDescription(
+                  `<@${interaction.user.id}> I set your AFK status with reason: \`${reason}\``
+               ),
+         ],
       });
    },
 };
