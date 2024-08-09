@@ -31,7 +31,7 @@ module.exports = {
          )
       ) {
          return interaction.reply({
-            content: "You don't have permission to use this command",
+            content: "You don't have permission to use this command.",
             ephemeral: true,
          });
       }
@@ -41,7 +41,7 @@ module.exports = {
       if (!timePattern.test(time)) {
          return interaction.reply({
             content:
-               "Wrong syntax, please use a valid time format (e.g., 1s, 2m, 3h)",
+               "Wrong syntax, please use a valid time format (e.g., 1s, 2m, 3h).",
             ephemeral: true,
          });
       }
@@ -51,7 +51,7 @@ module.exports = {
 
          if (formattedTime > 21600) {
             return interaction.reply({
-               content: "The time must be between 1 second and 6 hours",
+               content: "The time must be between 1 second and 6 hours.",
                ephemeral: true,
             });
          }
@@ -76,7 +76,7 @@ module.exports = {
       } catch (err) {
          console.error(err);
          interaction.reply({
-            content: "Something went wrong! Please try again later",
+            content: "Something went wrong! Please try again later.",
             ephemeral: true,
          });
       }

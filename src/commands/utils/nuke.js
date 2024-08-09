@@ -20,7 +20,7 @@ module.exports = {
          )
       )
          return interaction.reply({
-            content: "You don't have permission to use this command",
+            content: "You don't have permission to use this command.",
             ephemeral: true,
          });
 
@@ -40,7 +40,7 @@ module.exports = {
             });
       } catch (err) {
          interaction.reply({
-            content: "Something went wrong! Please try again later",
+            content: "Something went wrong! Please try again later.",
             ephemeral: true,
          });
 
