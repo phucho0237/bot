@@ -28,3 +28,4 @@ client.commands = new Collection();
 client.login(config.bot.token);
 
 require("./database/connect")();
+require("./utils/anti-crash")(client);
