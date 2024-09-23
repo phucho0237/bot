@@ -14,7 +14,7 @@ const client = new Client({
       GatewayIntentBits.GuildMessages,
    ],
    presence: {
-      activities: [{ name: "somthin", type: ActivityType.Competing }],
+      activities: [{ name: "ur mom eatin", type: ActivityType.Watching }],
       status: "dnd",
    },
 });
