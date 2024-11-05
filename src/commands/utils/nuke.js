@@ -33,11 +33,9 @@ module.exports = {
          await channel.delete();
          newChannel.setPosition(position);
 
-         newChannel
-            .send(`Nuked by \`${interaction.user.username}\``)
-            .then((msg) => {
-               setTimeout(() => msg.delete(), 5000);
-            });
+         newChannel.send(`Nuked by <@${interaction.user.id}>`).then((msg) => {
+            setTimeout(() => msg.delete(), 5000);
+         });
       } catch (err) {
          interaction.reply({
             content: "Something went wrong! Please try again later.",
