@@ -7,11 +7,11 @@ const {
 module.exports = {
    data: new SlashCommandBuilder()
       .setName("whois")
-      .setDescription("Get user infomation")
+      .setDescription("Get user information")
       .addUserOption((opt) =>
          opt
             .setName("target")
-            .setDescription("User to get infomation for")
+            .setDescription("User to get information for")
             .setRequired(true)
       ),
    /**
