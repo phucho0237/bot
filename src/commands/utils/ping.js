@@ -13,28 +13,36 @@ module.exports = {
     * @param {ChatInputCommandInteraction} interaction
     */
    async execute(interaction) {
-      const sent = await interaction.reply({
-         embeds: [
-            new EmbedBuilder()
-               .setColor("White")
-               .setDescription("🏓 Pinging..."),
-         ],
-         fetchReply: true,
-      });
+      try {
+         const sent = await interaction.reply({
+            embeds: [
+               new EmbedBuilder()
+                  .setColor("#CED9DE")
+                  .setDescription("🏓 Pinging..."),
+            ],
+            fetchReply: true,
+         });
 
-      interaction.editReply({
-         embeds: [
-            new EmbedBuilder()
-               .setColor("#CED9DE")
-               .setTitle("🏓 Ping")
-               .setDescription(
-                  `- Websocket latency: **${
-                     interaction.client.ws.ping
-                  }ms**\n- Roundtrip latency: **${
-                     sent.createdTimestamp - interaction.createdTimestamp
-                  }ms**`
-               ),
-         ],
-      });
+         const roundtripLatency =
+            sent.createdTimestamp - interaction.createdTimestamp;
+
+         await interaction.editReply({
+            embeds: [
+               new EmbedBuilder()
+                  .setColor("#CED9DE")
+                  .setTitle("🏓 Ping")
+                  .setDescription(
+                     `- Websocket latency: **${interaction.client.ws.ping}ms**\n- Roundtrip latency: **${roundtripLatency}ms**`
+                  ),
+            ],
+         });
+      } catch (err) {
+         console.error(err);
+         return interaction.reply({
+            content:
+               "An error occurred while fetching the ping. Please try again later.",
+            ephemeral: true,
+         });
+      }
    },
 };

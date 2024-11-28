@@ -36,12 +36,12 @@ module.exports = {
          });
       }
 
-      const timePattern = /^(\d+)(s|m|h|d|w|mth|y)$/;
+      const timePattern = /^(\d+)(s|m|h)$/;
 
       if (!timePattern.test(time)) {
          return interaction.reply({
             content:
-               "Wrong syntax, please use a valid time format (e.g., 1s, 2m, 3h).",
+               "Invalid syntax, please use a valid time format (e.g., 1s, 2m, 3h).",
             ephemeral: true,
          });
       }
@@ -58,25 +58,23 @@ module.exports = {
 
          await interaction.channel.setRateLimitPerUser(formattedTime);
 
-         interaction
-            .reply({
-               embeds: [
-                  new EmbedBuilder()
-                     .setColor("#CED9DE")
-                     .setDescription(
-                        formattedTime === 0
-                           ? "Successfully turned off the slowmode"
-                           : `Set the slowmode for this channel to \`${time}\``
-                     ),
-               ],
-            })
-            .then((msg) => {
-               setTimeout(() => msg.delete(), 5000);
-            });
+         const successMessage =
+            formattedTime === 0
+               ? "Successfully turned off the slowmode."
+               : `Set the slowmode for this channel to \`${time}\``;
+
+         const embed = new EmbedBuilder()
+            .setColor("#CED9DE")
+            .setDescription(successMessage);
+
+         const reply = await interaction.reply({ embeds: [embed] });
+
+         setTimeout(() => reply.delete(), 5000);
       } catch (err) {
          console.error(err);
          interaction.reply({
-            content: "Something went wrong! Please try again later.",
+            content:
+               "Something went wrong while setting the slowmode. Please try again later.",
             ephemeral: true,
          });
       }

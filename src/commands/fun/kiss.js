@@ -19,27 +19,45 @@ module.exports = {
    async execute(interaction) {
       const target = interaction.options.getMember("target");
 
-      if (target.id === interaction.user.id)
+      if (target.id === interaction.user.id) {
          return interaction.reply({
-            content: `How can you kiss myself, ${interaction.user.displayName}?`,
+            content: `How can you kiss yourself, ${interaction.user.displayName}?`,
             ephemeral: true,
          });
+      }
 
-      const result = await axios.get(
-         "https://api.otakugifs.xyz/gif?reaction=kiss"
-      );
+      try {
+         const result = await axios.get(
+            "https://api.otakugifs.xyz/gif?reaction=kiss"
+         );
 
-      interaction.reply({
-         embeds: [
-            new EmbedBuilder()
-               .setColor("#CED9DE")
-               .setAuthor({
-                  name: `${interaction.user.displayName} kissed ${target.user.displayName}. How cute!`,
-                  iconURL: interaction.user.avatarURL(),
-                  url: result.data.url,
-               })
-               .setImage(result.data.url),
-         ],
-      });
+         if (result.data && result.data.url) {
+            interaction.reply({
+               embeds: [
+                  new EmbedBuilder()
+                     .setColor("#CED9DE")
+                     .setAuthor({
+                        name: `${interaction.user.displayName} kissed ${target.user.displayName}. How cute!`,
+                        iconURL: interaction.user.avatarURL(),
+                        url: result.data.url,
+                     })
+                     .setImage(result.data.url),
+               ],
+            });
+         } else {
+            interaction.reply({
+               content:
+                  "An error occurred while processing the request. Please try again later.",
+               ephemeral: true,
+            });
+         }
+      } catch (err) {
+         console.error(err);
+         interaction.reply({
+            content:
+               "An error occurred while processing the request. Please try again later.",
+            ephemeral: true,
+         });
+      }
    },
 };
