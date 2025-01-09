@@ -1,4 +1,9 @@
-const { Events, CommandInteraction, Collection } = require("discord.js");
+const {
+   Events,
+   CommandInteraction,
+   Collection,
+   MessageFlags,
+} = require("discord.js");
 
 module.exports = {
    name: Events.InteractionCreate,
@@ -33,8 +38,8 @@ module.exports = {
             const expiredTimestamp = Math.round(expirationTime / 1000);
 
             return interaction.reply({
-               content: `${expiredTimestamp}`,
-               ephemeral: true,
+               content: `You are on a cooldown. You can use it again <t:${expiredTimestamp}:R>`,
+               flags: MessageFlags.Ephemeral,
             });
          }
       }
