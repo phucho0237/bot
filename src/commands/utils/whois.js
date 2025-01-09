@@ -24,7 +24,7 @@ module.exports = {
       if (!target) {
          return interaction.reply({
             content: "Could not find the specified user.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
       }
 

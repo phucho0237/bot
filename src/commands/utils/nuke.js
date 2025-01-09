@@ -2,6 +2,7 @@ const {
    SlashCommandBuilder,
    ChatInputCommandInteraction,
    PermissionsBitField,
+   MessageFlags,
 } = require("discord.js");
 
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
       ) {
          return interaction.reply({
             content: "You don't have permission to use this command.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
       }
 
@@ -41,9 +42,8 @@ module.exports = {
       } catch (err) {
          console.error(err);
          return interaction.reply({
-            content:
-               "Something went wrong while nuking the channel. Please try again later.",
-            ephemeral: true,
+            content: "Something went wrong! Please try again later.",
+            flags: MessageFlags.Ephemeral,
          });
       }
    },

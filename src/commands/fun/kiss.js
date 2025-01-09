@@ -2,6 +2,7 @@ const {
    SlashCommandBuilder,
    ChatInputCommandInteraction,
    EmbedBuilder,
+   MessageFlags,
 } = require("discord.js");
 const axios = require("axios");
 
@@ -22,7 +23,7 @@ module.exports = {
       if (target.id === interaction.user.id) {
          return interaction.reply({
             content: `How can you kiss yourself, ${interaction.user.displayName}?`,
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
       }
 
@@ -48,7 +49,7 @@ module.exports = {
             interaction.reply({
                content:
                   "An error occurred while processing the request. Please try again later.",
-               ephemeral: true,
+               flags: MessageFlags.Ephemeral,
             });
          }
       } catch (err) {
@@ -56,7 +57,7 @@ module.exports = {
          interaction.reply({
             content:
                "An error occurred while processing the request. Please try again later.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
       }
    },

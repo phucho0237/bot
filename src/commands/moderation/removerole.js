@@ -3,6 +3,7 @@ const {
    ChatInputCommandInteraction,
    PermissionsBitField,
    EmbedBuilder,
+   MessageFlags,
 } = require("discord.js");
 
 module.exports = {
@@ -36,7 +37,7 @@ module.exports = {
       )
          return interaction.reply({
             content: "You don't have permission to use this command.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
 
       try {
@@ -49,12 +50,12 @@ module.exports = {
                      `Successfully remove ${role} from ${target}.`
                   ),
             ],
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
       } catch (err) {
          interaction.reply({
             content: "Something went wrong! Please try again later.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
 
          console.error(err);

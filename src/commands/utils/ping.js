@@ -2,6 +2,7 @@ const {
    SlashCommandBuilder,
    ChatInputCommandInteraction,
    EmbedBuilder,
+   MessageFlags,
 } = require("discord.js");
 
 module.exports = {
@@ -39,9 +40,8 @@ module.exports = {
       } catch (err) {
          console.error(err);
          return interaction.reply({
-            content:
-               "An error occurred while fetching the ping. Please try again later.",
-            ephemeral: true,
+            content: "Something went wrong! Please try again later.",
+            flags: MessageFlags.Ephemeral,
          });
       }
    },

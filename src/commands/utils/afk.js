@@ -2,6 +2,7 @@ const {
    SlashCommandBuilder,
    ChatInputCommandInteraction,
    EmbedBuilder,
+   MessageFlags,
 } = require("discord.js");
 
 const afkModel = require("../../database/model/afk");
@@ -45,9 +46,8 @@ module.exports = {
       } catch (err) {
          console.error(err);
          interaction.reply({
-            content:
-               "An error occurred while setting your AFK status. Please try again later.",
-            ephemeral: true,
+            content: "Something went wrong! Please try again later.",
+            flags: MessageFlags.Ephemeral,
          });
       }
    },

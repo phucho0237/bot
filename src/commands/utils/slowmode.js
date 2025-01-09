@@ -3,6 +3,7 @@ const {
    ChatInputCommandInteraction,
    PermissionsBitField,
    EmbedBuilder,
+   MessageFlags,
 } = require("discord.js");
 const timestring = require("timestring");
 
@@ -32,7 +33,7 @@ module.exports = {
       ) {
          return interaction.reply({
             content: "You don't have permission to use this command.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
       }
 
@@ -42,7 +43,7 @@ module.exports = {
          return interaction.reply({
             content:
                "Invalid syntax, please use a valid time format (e.g., 1s, 2m, 3h).",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
       }
 
@@ -52,7 +53,7 @@ module.exports = {
          if (formattedTime > 21600) {
             return interaction.reply({
                content: "The time must be between 1 second and 6 hours.",
-               ephemeral: true,
+               flags: MessageFlags.Ephemeral,
             });
          }
 
@@ -73,9 +74,8 @@ module.exports = {
       } catch (err) {
          console.error(err);
          interaction.reply({
-            content:
-               "Something went wrong while setting the slowmode. Please try again later.",
-            ephemeral: true,
+            content: "Something went wrong! Please try again later.",
+            flags: MessageFlags.Ephemeral,
          });
       }
    },

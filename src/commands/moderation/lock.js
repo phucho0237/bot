@@ -2,6 +2,7 @@ const {
    SlashCommandBuilder,
    ChatInputCommandInteraction,
    PermissionsBitField,
+   MessageFlags,
 } = require("discord.js");
 
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
       )
          return interaction.reply({
             content: "You don't have permission to use this command.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
 
       const channel = interaction.channel;
@@ -32,7 +33,7 @@ module.exports = {
       if (perms.deny.has(PermissionsBitField.Flags.SendMessages))
          return interaction.reply({
             content: `<#${channel.id}> is locked already.`,
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
 
       try {
@@ -44,7 +45,7 @@ module.exports = {
       } catch (err) {
          interaction.reply({
             content: "Something went wrong! Please try again later.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
          });
 
          console.error(err);
