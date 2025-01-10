@@ -20,19 +20,18 @@ module.exports = {
    async execute(interaction) {
       const target = interaction.options.getMember("target");
 
-      if (target.id === interaction.user.id) {
+      if (target.id === interaction.user.id)
          return interaction.reply({
             content: `How can you kiss yourself, ${interaction.user.displayName}?`,
             flags: MessageFlags.Ephemeral,
          });
-      }
 
       try {
          const result = await axios.get(
             "https://api.otakugifs.xyz/gif?reaction=kiss"
          );
 
-         if (result.data && result.data.url) {
+         if (result.data.url) {
             interaction.reply({
                embeds: [
                   new EmbedBuilder()
